@@ -9,11 +9,17 @@ import matplotlib.pyplot as plt
 print('Hello')
 
 # Represent the map as the nodes and edges of a graph
-provinces = ['AB', 'BC', 'MB', 'NB', 'NL', 'NS',
-             'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']
-neighbors = [('AB', 'BC'), ('AB', 'NT'), ('AB', 'SK'), ('BC', 'NT'), ('BC', 'YT'),
-             ('MB', 'NU'), ('MB', 'ON'), ('MB', 'SK'), ('NB', 'NS'), ('NB', 'QC'),
-             ('NL', 'QC'), ('NT', 'NU'), ('NT', 'SK'), ('NT', 'YT'), ('ON', 'QC')]
+
+# Too big to run local cpu
+# provinces = ['AB', 'BC', 'MB', 'NB', 'NL', 'NS',
+#              'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']
+# neighbors = [('AB', 'BC'), ('AB', 'NT'), ('AB', 'SK'), ('BC', 'NT'), ('BC', 'YT'),
+#              ('MB', 'NU'), ('MB', 'ON'), ('MB', 'SK'), ('NB', 'NS'), ('NB', 'QC'),
+#              ('NL', 'QC'), ('NT', 'NU'), ('NT', 'SK'), ('NT', 'YT'), ('ON', 'QC')]
+
+# More simple sample
+provinces = ['A', 'B', 'C', 'D']
+neighbors = [('A', 'B'), ('A', 'C'), ('B', 'C'), ('B', 'D'), ('C', 'D')]
 
 
 # %%
@@ -45,12 +51,12 @@ for neighbor in neighbors:
 
 # %%
 bqm = dwavebinarycsp.stitch(csp)
-
+print('bqm', bqm.linear)
 
 # %%
 sampler = ExactSolver()
-# below will cause memory overflow
-# response = sampler.sample(bqm)
+# below would cause memory overflow. (over 20GB of mem.)
+response = sampler.sample(bqm)
 print(response)
 
 
